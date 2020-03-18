@@ -132,5 +132,10 @@
                 android:name="android.view.im"
                 android:resource="@xml/method" />
         </service>
+
+        <service android:name=".serial.SerialService" />
+        <service android:name=".serial.CommandService" />
+        <service android:name=".serial.SerialCommandService" />
+
     </application>
 </manifest>

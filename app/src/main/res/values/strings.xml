@@ -29,6 +29,7 @@
         This will only work if you have selected the Key Mapper keyboard. This action is best used with a hardware keyboard.</string>
 
     <string name="caption_action_type_text">Type some text you want to be inserted when you perform this action.</string>
+    <string name="caption_action_serial">Type some text you want to send to the serial port.</string>
     <string name="caption_action_type_url">Type a url which you want to be opened. The http://, https:// or www. isn\'t required.</string>
 
     <string name="switch_enabled">Enabled</string>
@@ -94,6 +95,7 @@
     <string name="button_add_trigger">Add Trigger</string>
     <string name="button_test">Test</string>
     <string name="button_done">Done</string>
+    <string name="button_test_command">Test Command</string>
     <string name="button_fix">Fix</string>
     <string name="button_recording_trigger">Recording Trigger…</string>
     <string name="button_recording_trigger_countdown">%d…</string>
@@ -244,6 +246,7 @@
     <string name="action_type_title_system_action">Other</string>
     <string name="action_type_title_text_block">Text</string>
     <string name="action_type_url">URL</string>
+    <string name="action_type_title_serial">Serial</string>
     <!--Action Types Titles-->
 
     <!--flags-->

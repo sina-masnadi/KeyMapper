@@ -53,12 +53,12 @@ object ActionUtils {
     private fun getTitle(ctx: Context, action: Action?): String? {
         action ?: return null
 
-        when (action.type) {
+        return when (action.type) {
             ActionType.APP -> {
                 try {
                     val applicationInfo = ctx.packageManager.getApplicationInfo(
-                        action.data,
-                        PackageManager.GET_META_DATA
+                            action.data,
+                            PackageManager.GET_META_DATA
                     )
 
                     val applicationLabel = ctx.packageManager.getApplicationLabel(applicationInfo)
@@ -78,28 +78,28 @@ object ActionUtils {
                 val systemActionId = action.data
 
                 return SystemActionUtils.getSystemActionDef(systemActionId).handle(
-                    onSuccess = { systemActionDef ->
+                        onSuccess = { systemActionDef ->
 
-                        if (systemActionDef.getOptions(ctx).isFailure) {
-                            systemActionDef.getDescription(ctx)
-                        } else {
-                            var optionLabel = Option.getOptionLabel(ctx, systemActionId, action.getOptionId())
+                            if (systemActionDef.getOptions(ctx).isFailure) {
+                                systemActionDef.getDescription(ctx)
+                            } else {
+                                var optionLabel = Option.getOptionLabel(ctx, systemActionId, action.getOptionId())
 
-                            //get a saved label for the option if it can't find one
-                            if (optionLabel == null) {
-                                when (systemActionId) {
-                                    SystemAction.SWITCH_KEYBOARD -> {
-                                        action.getExtraData(Action.EXTRA_IME_NAME).onSuccess { optionLabel = it }
+                                //get a saved label for the option if it can't find one
+                                if (optionLabel == null) {
+                                    when (systemActionId) {
+                                        SystemAction.SWITCH_KEYBOARD -> {
+                                            action.getExtraData(Action.EXTRA_IME_NAME).onSuccess { optionLabel = it }
+                                        }
                                     }
                                 }
+
+                                optionLabel ?: return@handle systemActionDef.getDescription(ctx)
+
+                                systemActionDef.getDescriptionWithOption(ctx, optionLabel!!)
                             }
-
-                            optionLabel ?: return@handle systemActionDef.getDescription(ctx)
-
-                            systemActionDef.getDescriptionWithOption(ctx, optionLabel!!)
-                        }
-                    },
-                    onFailure = { null })
+                        },
+                        onFailure = { null })
             }
 
             ActionType.URL -> {
@@ -121,6 +121,11 @@ object ActionUtils {
             ActionType.TEXT_BLOCK -> {
                 val text = action.data
                 return ctx.str(R.string.description_text_block, text)
+            }
+
+            ActionType.SERIAL -> {
+                val text = action.data
+                return ctx.str(R.string.description_keycode, text)
             }
         }
     }

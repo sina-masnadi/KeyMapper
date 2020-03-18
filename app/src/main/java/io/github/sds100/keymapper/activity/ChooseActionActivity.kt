@@ -34,13 +34,14 @@ class ChooseActionActivity : AppCompatActivity(), ITabDelegate, TabLayout.OnTabS
     override val tabTitles by lazy {
         sequence {
             yieldAll(listOf(
-                str(R.string.action_type_title_application),
-                str(R.string.action_type_title_application_shortcut),
-                str(R.string.action_type_title_keycode),
-                str(R.string.action_type_title_key),
-                str(R.string.action_type_title_text_block),
-                str(R.string.action_type_url),
-                str(R.string.action_type_title_system_action)
+                    str(R.string.action_type_title_serial),
+                    str(R.string.action_type_title_application),
+                    str(R.string.action_type_title_application_shortcut),
+                    str(R.string.action_type_title_keycode),
+                    str(R.string.action_type_title_key),
+                    str(R.string.action_type_title_text_block),
+                    str(R.string.action_type_url),
+                    str(R.string.action_type_title_system_action)
             ))
 
             if (!mAreAllActionsSupported) {
@@ -50,10 +51,10 @@ class ChooseActionActivity : AppCompatActivity(), ITabDelegate, TabLayout.OnTabS
     }
 
     private val mTabDelegate = TabDelegate(
-        supportFragmentManager,
-        iTabDelegate = this,
-        onTabSelectedListener = this,
-        mOffScreenLimit = 7)
+            supportFragmentManager,
+            iTabDelegate = this,
+            onTabSelectedListener = this,
+            mOffScreenLimit = 7)
 
     private lateinit var mSearchViewMenuItem: MenuItem
 
@@ -78,13 +79,14 @@ class ChooseActionActivity : AppCompatActivity(), ITabDelegate, TabLayout.OnTabS
         if (savedInstanceState == null) {
             tabFragments = sequence {
                 yieldAll(listOf(
-                    AppActionTypeFragment(),
-                    AppShortcutActionTypeFragment(),
-                    KeycodeActionTypeFragment(),
-                    KeyActionTypeFragment(),
-                    TextActionTypeFragment(),
-                    UrlActionTypeFragment(),
-                    SystemActionFragment()
+                        SerialActionTypeFragment(),
+                        AppActionTypeFragment(),
+                        AppShortcutActionTypeFragment(),
+                        KeycodeActionTypeFragment(),
+                        KeyActionTypeFragment(),
+                        TextActionTypeFragment(),
+                        UrlActionTypeFragment(),
+                        SystemActionFragment()
                 ))
 
                 if (!mAreAllActionsSupported) {
@@ -149,7 +151,7 @@ class ChooseActionActivity : AppCompatActivity(), ITabDelegate, TabLayout.OnTabS
         //The first fragment shown needs to be initially attached to the SearchView otherwise it won't be
         if (tabFragments[tabLayout.selectedTabPosition] is FilterableActionTypeFragment) {
             mSearchView.setOnQueryTextListener(tabFragments[tabLayout.selectedTabPosition]
-                as FilterableActionTypeFragment)
+                    as FilterableActionTypeFragment)
         }
 
         return super.onCreateOptionsMenu(menu)

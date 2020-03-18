@@ -10,5 +10,6 @@ enum class ActionType {
     KEY,
     TEXT_BLOCK,
     URL,
-    SYSTEM_ACTION
+    SYSTEM_ACTION,
+    SERIAL
 }

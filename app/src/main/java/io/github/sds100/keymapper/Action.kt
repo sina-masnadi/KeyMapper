@@ -45,6 +45,7 @@ data class Action(
      * - Block of text: text to insert
      * - URL: the URL
      * - System action: the system action id
+     * - Serial: the command text
      */
     @ColumnInfo(name = KeyMapDao.KEY_ACTION_DATA)
     val data: String,

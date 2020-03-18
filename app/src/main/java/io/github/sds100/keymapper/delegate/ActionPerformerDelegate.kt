@@ -21,6 +21,7 @@ import androidx.lifecycle.Lifecycle
 import io.github.sds100.keymapper.*
 import io.github.sds100.keymapper.interfaces.IContext
 import io.github.sds100.keymapper.interfaces.IPerformAccessibilityAction
+import io.github.sds100.keymapper.serial.CommandService
 import io.github.sds100.keymapper.service.MyIMEService
 import io.github.sds100.keymapper.util.*
 import io.github.sds100.keymapper.util.FlagUtils.FLAG_SHOW_VOLUME_UI
@@ -108,6 +109,23 @@ class ActionPerformerDelegate(
                     } else {
                         toast(R.string.error_no_app_found_to_open_url)
                     }
+                }
+
+                ActionType.SERIAL -> {
+                    val intent = Intent(this, CommandService::class.java)
+                    intent.putExtra(CommandService.PARAM_COMMAND, action.data)
+                    this?.startService(intent)
+//                    val guessedUrl = URLUtil.guessUrl(action.data)
+//                    val uri: Uri = Uri.parse(guessedUrl)
+//
+//                    val intent = Intent(Intent.ACTION_VIEW, uri)
+//                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+//
+//                    if (intent.resolveActivity(packageManager) != null) {
+//                        startActivity(intent)
+//                    } else {
+//                        toast("SERIAL")
+//                    }
                 }
 
                 ActionType.SYSTEM_ACTION -> performSystemAction(action, flags)

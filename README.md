@@ -1,84 +1,16 @@
-![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/sds100/KeyMapper.svg)
-![GitHub Releases Downloads](https://img.shields.io/github/downloads/sds100/keymapper/total.svg?label=GitHub%20Releases%20Downloads)
-![GitHub release](https://img.shields.io/github/release/sds100/KeyMapper.svg)
-![fdroid release](https://img.shields.io/f-droid/v/io.github.sds100.keymapper.svg)
+### Android Key Mapper with Serial Support 
 
-Key Mapper is a free and open source Android app that can map a single or multiple key events to a custom action. The aim of this project is to allow anyone to make any button they use with their Android device do whatever they want.
+This is a fork of [Key Mapper](https://github.com/sina-masnadi/KeyMapper) with the ability of sending commands to serial devices connected over USB. It uses [usb-serial-for-android](https://github.com/mik3y/usb-serial-for-android) as the serial communication library.
 
-[XDA Developers thread](https://forum.xda-developers.com/android/apps-games/app-keyboard-button-mapper-t3914005)  
+I made this to control my old Pioneer home theater receiver using my (Sony) Android TV remote control. For example, the volume keys on the TV remote control can be assigned to send VU or VD commands to the receiver to adjust the volume.
+The receiver does not support HDMI CEC and only has an RS-232 port for remote control purpose and I used a USB to RS-232 adapter which uses Ch34x Serial Driver to connect the TV to the receiver. 
 
-![](app/src/main/res/mipmap-xxhdpi/ic_launcher_round.png?raw=true)
-<a href='https://play.google.com/store/apps/details?id=io.github.sds100.keymapper&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_gb/badges/images/generic/en_badge_web_generic.png' height=75px/> </a>
-<a href='https://f-droid.org/en/packages/io.github.sds100.keymapper/'><img alt='Get it on F-Droid' src='https://fdroid.gitlab.io/artwork/badge/get-it-on.png' height=75px/> </a>
+You can find a list of RS-232 commands for Pioneer Receivers [here](https://www.pioneerelectronics.com/StaticFiles/Custom%20Install/RS-232%20Codes/Av%20Receivers/Elite%20&%20Pioneer%20FY13AVR%20IP%20&%20RS-232%205-8-12.xls).
 
-### How do I contribute?
-You can help by suggesting ideas, notifying me of any bugs or contributing to the code directly. You can post suggestions and bug fixes by emailing me or posting in the XDA thread, Telegram channel or GitHub issues page for this repo.
+![](screenshots/serial.png?raw=true)
 
-[![ko-fi](https://www.ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/M4M41032E)
-
-To build and help with code stuff...
-1. Fork the KeyMapper repository (repo).
-2. Clone the repo to your device. It will clone to a folder called KeyMapper by default.
-3. [Install](https://developer.android.com/studio/install) Android Studio if you don't have it already. It is available for Windows, Linux and macOS.
-4. Open the cloned KeyMapper folder in Android Studio. Install anything Android Studio prompts you to install. E.g the gradle wrapper version used by KeyMapper or older Android SDK versions.
-5. Checkout (switch to) the "develop" branch.
-6. Make any changes then commit them to your forked repo then make a pull request!
-
-### I need help in the app!
-Look at the [help](https://github.com/sds100/KeyMapper/wiki/Help) page in the wiki.
-
-### Translations 🌍
-Take a look at the [translations](https://github.com/sds100/KeyMapper/wiki/Translate) page in the wiki. Any translations will be appreciated. 😊
-
-### Branches 🌴
- - master: Everything in the latest stable release.
- - develop: The most recent changes. The app is potentially unstable but it can be successfully compiled. Merges into a release branch when enough has been changed for a new release.
-
- - release/*: Branched off develop. Beta releases for a particular release are compiled from here. Once the code is stable, it will be merged into master. No big changes should be made/merged here as the purpose of this branch is to make a release stable. By separating upcoming releases from develop, new features can be worked on in develop without affecting the upcoming release's code base.
- - feature/*: Any new changes currently being developed. Merges into develop.
- - hotfix/*: Any small, quick (atleast things which SHOULD be quick) changes that need to be made. Merge into develop and release. If there is no release already being worked on, quickly release a new version depending on how critical the issue is and merge the new release branch into master.
-
-### Versioning
-This project uses semantic versioning. e.g 1.2.3-alpha.1
-
-- 1st digit: major release. Only incremented when a big enough change happens to the project.
-- 2nd digit: minor releases. Incremented when a new feature or a few are added.
-- 3rd digit: patches. Incrememtend after a hotfix or bug fix.
-
-Additional labels can be used as a suffix. e.g "alpha".
-
-#### Version codes
-The version code in the develop branch should always be the highest. Therefore, when a new version is released in the release branch, it should be incremented as well.
-
-### Commit message format
-
-Format:
-```
-<type>: <subject [issue it is related to including the #]
-
-body
-
-footer
-```
-
-Every feature or bug fix commit should have an issue associated with it. This forces the developer to plan what they are doing, which improves efficiency. A feature should be split up into multiple tasks and each task should have its own commit. The feature should be developd on a sepearate branch and these commits should be squashed into a single commit when the branch is merged.
-
-#### Example
-```
-feat: This a new feature #100
-
-Extra information about the feature goes in here. It should be wrapped to
-roughly 80 characters.
-```
-
-#### Types
-- feat: a new feature
-- fix: a bug fix
-- docs: changes to documentation
-- style: formatting, missing semi colons, etc; no code change
-- refactor: refactoring production code
-- test: adding tests, refactoring test; no production code change
-- chore: updating build tasks, package manager configs, version name changes, etc; no production code change
-- release: a new release. Put issues it resolves in the footer. E.g "Resolves: #543"
-
-The README, License, Credits, Changelog and Privacy Policy files should just be changed in the master branch.
+Things to notice:
+1. It only supports one USB serial device at this time.
+2. It uses <CR> for the end of command
+3. There is no UI right now to show/use the received data on serial port
+4. The connection opens before sending each command and will be closed after the command has been sent
