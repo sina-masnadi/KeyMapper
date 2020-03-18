@@ -7,7 +7,7 @@ The receiver does not support HDMI CEC and only has an RS-232 port for remote co
 
 You can find a list of RS-232 commands for Pioneer Receivers [here](https://www.pioneerelectronics.com/StaticFiles/Custom%20Install/RS-232%20Codes/Av%20Receivers/Elite%20&%20Pioneer%20FY13AVR%20IP%20&%20RS-232%205-8-12.xls).
 
-![](screenshots/serial.png?raw=true)
+![](screenshots/serial_small.png?raw=true)
 
 Things to notice:
 1. It only supports one USB serial device at this time.
