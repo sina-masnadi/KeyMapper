@@ -7,10 +7,10 @@ The receiver does not support HDMI CEC and only has an RS-232 port for remote co
 
 You can find a list of RS-232 commands for Pioneer Receivers [here](https://www.pioneerelectronics.com/StaticFiles/Custom%20Install/RS-232%20Codes/Av%20Receivers/Elite%20&%20Pioneer%20FY13AVR%20IP%20&%20RS-232%205-8-12.xls).
 
-![](screenshots/serial_small.png?raw=true)
+<img src="screenshots/serial_small.png?raw=true" height="480">
 
 Things to notice:
 1. It only supports one USB serial device at this time.
-2. It uses <CR> for the end of command
+2. It uses **\<CR\>** for the end of command
 3. There is no UI right now to show/use the received data on serial port
 4. The connection opens before sending each command and will be closed after the command has been sent
